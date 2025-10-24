@@ -1,32 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top fixed-top">
-    <a class="navbar-brand" href="/" style="font-weight: 700;
-    font-size: 24px;"> <span style="color: red;" >Daily News</span> Network</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" href="/">NewsApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse searc-bar" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/business">Business</a></li>
+          <li class="nav-item"><a class="nav-link" href="/entertainment">Entertainment</a></li>
+          <li class="nav-item"><a class="nav-link" href="/general">General</a></li>
+          <li class="nav-item"><a class="nav-link" href="/health">Health</a></li>
+          <li class="nav-item"><a class="nav-link" href="/science">Science</a></li>
+          <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
+          <li class="nav-item"><a class="nav-link" href="/technology">Technology</a></li>
+      </ul>
 
-        <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
-            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" style="width: 522px;"
-                aria-label="Search">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-    <div class="dropdown">
-        <button type="button" class="btn dropdown-toggle btn-outline-danger my-2 my-sm-0" data-toggle="dropdown">
-          Category
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="/news/business">Business</a>
-          <a class="dropdown-item" href="/news/entertainment">Entertain</a>
-          <a class="dropdown-item" href="/news/general">General</a>
-          <a class="dropdown-item" href="/news/health">Health</a>
-          <a class="dropdown-item" href="/news/technology">Technology</a>
-          <a class="dropdown-item" href="/news/sports">Sports</a>
-          <a class="dropdown-item" href="/news/science">Science</a>
-
-        </div>
-      </div>
+      <!-- Search Form -->
+      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+  </div>
 </nav>
