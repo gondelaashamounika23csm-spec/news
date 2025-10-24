@@ -1,42 +1,81 @@
-<%- include("partials/header.ejs") %> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
 <body>
 
-<%- include("partials/navbar.ejs") %> 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">NewsApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="news-container ">
-        <div class="news ">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/business">Business</a></li>
+            <li class="nav-item"><a class="nav-link" href="/entertainment">Entertainment</a></li>
+            <li class="nav-item"><a class="nav-link" href="/health">Health</a></li>
+            <li class="nav-item"><a class="nav-link" href="/science">Science</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
+            <li class="nav-item"><a class="nav-link" href="/technology">Technology</a></li>
+        </ul>
 
-            <% articles.forEach(function(article,index){ %>
-
-                <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
-                    <% } else{ %>
-                        <a href="<%- article.url %>" target="_blank" class="news-box Hover-effect">
-
-                            <img src="<%- article.urlToImage %>" alt="Image">
-                            <h3>
-                                <%- article.title %>
-                            </h3>
-
-
-                            <p>
-                                <%- article.content.replace(/<[^>]+>/g, '') %>
-                            </p>
-                            <br>
-                            <p style="margin-bottom: 0px; position: absolute; right: 0; bottom: 0; font-family: ui-monospace;">Updated: <span style="color:red;" ><%- new Date(article.publishedAt.slice(0,10)).toDateString() %>    <%- moment.utc(article.publishedAt).local().format('hh : mm A') %> </span></p>
-
-
-                        </a>
-                        <% } %>
-                        <% }) %>
-        </div>
+        <!-- Search Form -->
+        <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
+</nav>
 
-<script src="moment.js"></script>
-<script src="moment-timezone-with-data.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- News Container -->
+<div class="container news-container">
+    <div class="row">
+        <% if(articles.length === 0){ %>
+            <div class="col-12 text-center">
+                <p>No articles found.</p>
+            </div>
+        <% } else { %>
+            <% articles.forEach(function(article){ %>
+                <% if(article.url && article.title && article.urlToImage && article.content){ %>
+                    <div class="col-md-4 mb-4">
+                        <a href="<%- article.url %>" target="_blank" class="card news-box h-100 hover-effect">
+                            <img class="card-img-top" src="<%- article.urlToImage %>" alt="News Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><%- article.title %></h5>
+                                <p class="card-text"><%- article.content.replace(/<[^>]+>/g, '') %></p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Updated: <%- moment.utc(article.publishedAt).local().format('LLL') %>
+                            </div>
+                        </a>
+                    </div>
+                <% } %>
+            <% }) %>
+        <% } %>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
 </body>
-
 </html>
